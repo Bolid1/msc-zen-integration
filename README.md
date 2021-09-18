@@ -282,6 +282,18 @@ class Integration {
 В случае, если результат сверки предыдущего дня показал
 расхождение, необходимо уведомить ответственного за интеграцию
 
+## Соответствие ресурсов
+
+В данном разделе приведены таблицы соответствий полей сущности ZenMoney и MSC.
+
+### Аккаунт
+
+| Zen                   | MSC      |
+| --------------------- | -------- |
+| title                 | title    | Название счёта
+| balance               | balance  | текущий баланс счета
+| instrument.shortTitle | currency | Трёхсимвольный код валюты
+
 [lumen]: https://lumen.laravel.com/docs
 [zen-money-api]: https://github.com/zenmoney/ZenPlugins/wiki/ZenMoney-API
 [msc-core]: https://github.com/Bolid1/mysmartchoice-core
