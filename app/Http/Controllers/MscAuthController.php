@@ -49,7 +49,6 @@ class MscAuthController extends Controller
         // urlAuthorize option and generates and applies any necessary parameters
         // (e.g. state).
         return redirect()->to($provider->getAuthorizationUrl([
-            // TODO: Possible just JWT, check it, plz
             'state' => Crypt::encrypt($input),
             'scope' => [
                 'view-me',
