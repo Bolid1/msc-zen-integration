@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Events;
 
 class ExampleEvent extends Event
@@ -11,6 +13,5 @@ class ExampleEvent extends Event
      */
     public function __construct()
     {
-        //
     }
 }

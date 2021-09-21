@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Jobs;
 
 class ExampleJob extends Job
@@ -11,7 +13,6 @@ class ExampleJob extends Job
      */
     public function __construct()
     {
-        //
     }
 
     /**
@@ -21,6 +22,5 @@ class ExampleJob extends Job
      */
     public function handle()
     {
-        //
     }
 }
