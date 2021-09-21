@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/** @var \Laravel\Lumen\Routing\Router $router */
+/** @var Router $router */
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +15,15 @@ declare(strict_types=1);
 |
 */
 
+use Laravel\Lumen\Routing\Router;
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
+});
+
+$router->group(['prefix' => 'oauth'], function () use ($router) {
+    $router->group(['prefix' => 'msc'], function () use ($router) {
+        $router->get('auth', 'MscAuthController@auth');
+        $router->get('code', 'MscAuthController@code');
+    });
 });
