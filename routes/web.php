@@ -26,4 +26,8 @@ $router->group(['prefix' => 'oauth'], function () use ($router) {
         $router->get('auth', 'MscAuthController@auth');
         $router->get('code', 'MscAuthController@code');
     });
+    $router->group(['prefix' => 'zen'], function () use ($router) {
+        $router->get('auth', 'ZenAuthController@auth');
+        $router->get('code', 'ZenAuthController@code');
+    });
 });

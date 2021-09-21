@@ -97,17 +97,17 @@ class MscToken {
 }
 
 class ZenToken {
-    zen_group_id
+    group_id
 }
 
 class ZenUser {
-    zen_group_id
+    group_id
 }
 
 class Integration {
     msc_user_id
     msc_firm_id
-    zen_group_id
+    group_id
 }
 
 @enduml
@@ -142,18 +142,18 @@ Integration --{ ZenResourceResult
 class ZenResourceResult {
     msc_user_id
     msc_firm_id
-    zen_group_id
+    group_id
     zen_resource_id
 }
 
 class ZenResource {
-    zen_group_id
+    group_id
 }
 
 class Integration {
     msc_user_id
     msc_firm_id
-    zen_group_id
+    group_id
 }
 
 @enduml
@@ -168,7 +168,7 @@ class Integration {
   с помощью которого удастся выгрузить данные
 * Выгруженные данные сохраняются в таблицу ресурсов, с мета-информацией, полезной
   при обработке ресурса:
-  * Идентификатор группы (`zen_group_id`), которой принадлежит ресурс
+  * Идентификатор группы (`group_id`), которой принадлежит ресурс
   * Тип ресурса (аккаунт, транзакция и т.д.)
   * Идентификатор ресурса в ZenMoney
   * Флаг, сигнализирующий о том, что сущность была окончательно удалена в ZenMoney
@@ -212,7 +212,7 @@ class MscToken {
 class MscResourceResult {
     msc_user_id
     msc_firm_id
-    zen_group_id
+    group_id
     msc_resource_id
 }
 
@@ -224,7 +224,7 @@ class MscResource {
 class Integration {
     msc_user_id
     msc_firm_id
-    zen_group_id
+    group_id
 }
 
 @enduml
