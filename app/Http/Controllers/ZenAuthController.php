@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Managers\ZenTokenManager;
+use App\Models\Integration;
 use App\OAuth\ZenProvider;
 use DomainException;
 use Illuminate\Contracts\Encryption\DecryptException;
@@ -123,7 +124,11 @@ class ZenAuthController extends Controller
             return 'Application general error occurred, please try again later.';
         }
 
-        // TODO: Create integration with $token->group_id & (int)$state['user_id'], (int)$state['firm_id']
+        Integration::updateOrCreate([
+            'msc_user_id' => $state['user_id'],
+            'msc_firm_id' => $state['firm_id'],
+            'group_id' => $token->group_id,
+        ]);
 
         return redirect()->to($state['redirect_to'], 303);
     }

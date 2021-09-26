@@ -5,10 +5,10 @@
 
 ## Альфа релиз
 
-- [ ] MSC authorize callback
-- [ ] MSC redirect callback
-- [ ] ZenMoney authorize callback
-- [ ] ZenMoney redirect callback
+- [x] MSC authorize callback
+- [x] MSC redirect callback
+- [x] ZenMoney authorize callback
+- [x] ZenMoney redirect callback
 - [ ] zen:download Command
 - [ ] msc:upload Command
 - [ ] zen:upload Command
