@@ -6,11 +6,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * Объединение пользователей ZenMoney.
  *
  * @property positive-int $id Идентификатор группы
+ * @property Carbon|null $last_synced_at Дата последней синхронизации
  *
  * @mixin Builder
  *
@@ -22,4 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ZenGroup extends Model
 {
+    protected $casts = [
+        'last_synced_at' => 'timestamp',
+    ];
 }

@@ -17,6 +17,8 @@ use Illuminate\Support\Carbon;
  * @property Carbon $expires_at В эту дату срок действия токена завершится
  * @property string $access Сам токен
  * @property string $refresh Специальный ключ для получения нового токена
+ * @property string $status Статус токена: рабочий/сломан
+ * @property string|null $last_error Информация о последней полученной ошибке
  *
  * @mixin Builder
  *
@@ -44,4 +46,16 @@ class ZenToken extends Model
         'access' => 'string',
         'refresh' => 'string',
     ];
+
+    public const STATUS_DISABLED = 'disabled';
+    public const STATUS_ACTIVE = 'active';
+    public const STATUS_ERROR = 'error';
+
+    public function deactivate(?string $error = null): self
+    {
+        $this->status = static::STATUS_ERROR;
+        $this->last_error = $error;
+
+        return $this;
+    }
 }

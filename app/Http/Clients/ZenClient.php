@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Clients;
 
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 use function config;
 use function data_get;
@@ -35,9 +36,9 @@ class ZenClient
      * @param array $body Отправляемые данные (список накопившихся изменений или управляющие команды)
      * @param int|null $lastSyncedAt Дата последней синхронизации, влияет на количество получаемых в ответ данных
      *
-     * @return array Ответ от сервера, {@link https://github.com/zenmoney/ZenPlugins/wiki/ZenMoney-API#Сущности-}
+     * @return Response Ответ от сервера, {@link https://github.com/zenmoney/ZenPlugins/wiki/ZenMoney-API#Сущности-}
      */
-    public function diff(string $token, array $body = [], ?int $lastSyncedAt = null): array
+    public function diff(string $token, array $body = [], ?int $lastSyncedAt = null): Response
     {
         return Http::withHeaders(['Authorization' => "Bearer {$token}"])
                    ->post(
@@ -46,8 +47,7 @@ class ZenClient
                            'currentClientTimestamp' => time(),
                            'serverTimestamp' => $lastSyncedAt ?? 0,
                        ]
-                   )
-                   ->json() ?: [];
+                   );
     }
 
     /**
@@ -60,6 +60,6 @@ class ZenClient
      */
     public function all(string $token, string $type): array
     {
-        return data_get($this->diff($token, ['forceFetch' => [$type]], time()), $type, []);
+        return data_get($this->diff($token, ['forceFetch' => [$type]], time())->json(), $type, []);
     }
 }
