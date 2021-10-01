@@ -65,6 +65,12 @@ class ZenSyncService
                 }
             );
 
+        if (null === $response) {
+            Log::warning('Failed to load data from ZenMoney');
+
+            return;
+        }
+
         foreach ($response as $key => $items) {
             if (is_array($items)) {
                 Log::info('Start save items from ZenMoney', [
