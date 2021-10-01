@@ -50,7 +50,8 @@ class ZenSyncService
             $integration->msc_firm_id
         );
 
-        $lastSyncedDate = $integration->group->last_synced_at;
+        $group = $integration->group;
+        $lastSyncedDate = $group->last_synced_at;
         $lastSyncedAt = null === $lastSyncedDate ? 0 : $lastSyncedDate->timestamp;
 
         $groupId = $integration->group_id;
@@ -85,10 +86,10 @@ class ZenSyncService
             }
         }
 
-        $integration->group->last_synced_at = Carbon::createFromTimestamp(
+        $group->last_synced_at = Carbon::createFromTimestamp(
             $response['serverTimestamp'] ?? time()
         );
-        $integration->save();
+        $group->save();
     }
 
     /**
