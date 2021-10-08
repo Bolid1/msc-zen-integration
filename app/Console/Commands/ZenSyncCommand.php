@@ -16,7 +16,7 @@ use function dispatch;
 class ZenSyncCommand extends Command
 {
     /** {@inheritdoc} */
-    protected $signature = 'zen:sync';
+    protected $signature = 'sync:zen';
 
     /** {@inheritdoc} */
     protected $description = 'Exchange data with ZenMoney';
