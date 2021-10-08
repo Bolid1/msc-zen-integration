@@ -25,6 +25,6 @@ use Illuminate\Support\Carbon;
 class ZenGroup extends Model
 {
     protected $casts = [
-        'last_synced_at' => 'timestamp',
+        'last_synced_at' => 'immutable_datetime',
     ];
 }
