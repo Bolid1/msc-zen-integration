@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+use App\Extensions\EloquentBuilder;
+use App\Extensions\Model;
 use Illuminate\Support\Carbon;
 
 /**
  * Представление для токена сервиса MSC.
  *
  * @property positive-int $id Идентификатор токена в приложении
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property string $msc_user_id Идентификатора пользователя MSC
  * @property string $msc_firm_id Идентификатора фирмы MSC
  * @property string $type Тип токена
@@ -19,12 +21,12 @@ use Illuminate\Support\Carbon;
  * @property string $access Сам токен
  * @property string $refresh Специальный ключ для получения нового токена
  *
- * @mixin Builder
+ * @mixin EloquentBuilder
  *
  * @method static MscToken firstOrCreate(array $attributes = [], array $values = [])
- * @method static Builder|MscToken newModelQuery()
- * @method static Builder|MscToken newQuery()
- * @method static Builder|MscToken query()
+ * @method static EloquentBuilder|MscToken newModelQuery()
+ * @method static EloquentBuilder|MscToken newQuery()
+ * @method static EloquentBuilder|MscToken query()
  */
 class MscToken extends Model
 {

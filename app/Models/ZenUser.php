@@ -4,22 +4,25 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+use App\Extensions\EloquentBuilder;
+use App\Extensions\Model;
+use Illuminate\Support\Carbon;
 
 /**
  * Представление пользователя ZenMoney.
  *
  * @property string $zen_user_id Идентификатор пользователя в ZenMoney
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property int $group_id Идентификатор группы {@see ZenGroup::$id}
  *
- * @mixin Builder
+ * @mixin EloquentBuilder
  *
  * @method static ZenUser firstOrCreate(array $attributes = [], array $values = [])
- * @method static Builder|ZenUser newModelQuery()
- * @method static Builder|ZenUser newQuery()
- * @method static Builder|ZenUser query()
- * @method static Builder|ZenUser where($column, $operator = null, $value = null, $boolean = 'and')
+ * @method static EloquentBuilder|ZenUser newModelQuery()
+ * @method static EloquentBuilder|ZenUser newQuery()
+ * @method static EloquentBuilder|ZenUser query()
+ * @method static EloquentBuilder|ZenUser where($column, $operator = null, $value = null, $boolean = 'and')
  */
 class ZenUser extends Model
 {

@@ -31,6 +31,6 @@ class ZenSyncJob extends Job implements ShouldBeUnique
      */
     public function uniqueId(): string
     {
-        return (string) $this->integrationId;
+        return (string)$this->integrationId;
     }
 }

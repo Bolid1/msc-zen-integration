@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+use App\Extensions\EloquentBuilder;
+use App\Extensions\Model;
 use Illuminate\Support\Carbon;
 
 /**
  * Представление для токена сервиса ZenMoney.
  *
  * @property positive-int $id Идентификатор токена в приложении
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property string $group_id Идентификатор группы {@see ZenGroup::$id}
  * @property string $type Тип токена
  * @property Carbon $expires_at В эту дату срок действия токена завершится
@@ -20,12 +22,12 @@ use Illuminate\Support\Carbon;
  * @property string $status Статус токена: рабочий/сломан
  * @property string|null $last_error Информация о последней полученной ошибке
  *
- * @mixin Builder
+ * @mixin EloquentBuilder
  *
  * @method static ZenToken firstOrCreate(array $attributes = [], array $values = [])
- * @method static Builder|ZenToken newModelQuery()
- * @method static Builder|ZenToken newQuery()
- * @method static Builder|ZenToken query()
+ * @method static EloquentBuilder|ZenToken newModelQuery()
+ * @method static EloquentBuilder|ZenToken newQuery()
+ * @method static EloquentBuilder|ZenToken query()
  */
 class ZenToken extends Model
 {

@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+use App\Extensions\EloquentBuilder;
+use App\Extensions\Model;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -14,21 +17,26 @@ use Illuminate\Support\Carbon;
  * @see https://github.com/zenmoney/ZenPlugins/wiki/ZenMoney-API
  *
  * @property positive-int $id Внутренний идентификатор в приложении
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  * @property positive-int $group_id Идентификатор группы
  * @property string $type Тип данных ({@see ZenRawItem::TYPE_*})
  * @property string $zen_id Идентификатор данных в ZenMoney
  * @property Carbon|null $changed_at Когда в ZenMoney произошло изменение
  * @property string $action Тип действия (удаление/создание-обновление)
  * @property array $data Полный массив полученной информации
+ * @property Collection|ZenResourceResult[] $results Список к отправке в MSC.
+ * @property ZenGroup|null $group {@see ZenGroup}
+ * @property bool $need_result Требуется ли подготовить {@see ZenResourceResult} для этой строки
  *
- * @mixin Builder
+ * @mixin EloquentBuilder
  *
  * @method static ZenRawItem firstOrCreate(array $attributes = [], array $values = [])
  * @method static ZenRawItem findOrNew($id, $columns = ['*'])
- * @method static Builder|ZenRawItem newModelQuery()
- * @method static Builder|ZenRawItem newQuery()
- * @method static Builder|ZenRawItem query()
- * @method static Builder|ZenRawItem where($column, $operator = null, $value = null, $boolean = 'and')
+ * @method static EloquentBuilder|ZenRawItem newModelQuery()
+ * @method static EloquentBuilder|ZenRawItem newQuery()
+ * @method static EloquentBuilder|ZenRawItem query()
+ * @method static EloquentBuilder|ZenRawItem where($column, $operator = null, $value = null, $boolean = 'and')
  */
 class ZenRawItem extends Model
 {
@@ -84,4 +92,32 @@ class ZenRawItem extends Model
         'changed_at',
         'data',
     ];
+
+    public function results(): HasMany
+    {
+        return $this->hasMany(ZenResourceResult::class, 'zen_raw_item_id');
+    }
+
+    public function group(): BelongsTo
+    {
+        return $this->belongsTo(ZenGroup::class, 'group_id');
+    }
+
+    public function setActual(self $actual): self
+    {
+        $this->setRawAttributes(
+            $actual->getAttributes() + $this->getAttributes()
+        );
+
+        $this->need_result = $this->need_result || $this->wasChanged();
+
+        return $this;
+    }
+
+    public function markSynced(): self
+    {
+        $this->need_result = false;
+
+        return $this;
+    }
 }

@@ -44,9 +44,7 @@ class ZenRawItemsManager
             ];
 
             if ($model = ZenRawItem::where($uniq)->first()) {
-                $model->setRawAttributes(
-                    $modelOrErrors->getAttributes() + $model->getAttributes()
-                );
+                $model->setActual($modelOrErrors);
             } else {
                 $model = $modelOrErrors;
             }
