@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Extensions\EloquentBuilder;
 use App\Extensions\Model;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -28,15 +27,6 @@ use Illuminate\Support\Carbon;
  * @property Collection|ZenResourceResult[] $results Список к отправке в MSC.
  * @property ZenGroup|null $group {@see ZenGroup}
  * @property bool $need_result Требуется ли подготовить {@see ZenResourceResult} для этой строки
- *
- * @mixin EloquentBuilder
- *
- * @method static ZenRawItem firstOrCreate(array $attributes = [], array $values = [])
- * @method static ZenRawItem findOrNew($id, $columns = ['*'])
- * @method static EloquentBuilder|ZenRawItem newModelQuery()
- * @method static EloquentBuilder|ZenRawItem newQuery()
- * @method static EloquentBuilder|ZenRawItem query()
- * @method static EloquentBuilder|ZenRawItem where($column, $operator = null, $value = null, $boolean = 'and')
  */
 class ZenRawItem extends Model
 {

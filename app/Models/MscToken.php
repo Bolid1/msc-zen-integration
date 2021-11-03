@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Extensions\EloquentBuilder;
 use App\Extensions\Model;
 use Illuminate\Support\Carbon;
 
@@ -20,13 +19,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon $expires_at В эту дату срок действия токена завершится
  * @property string $access Сам токен
  * @property string $refresh Специальный ключ для получения нового токена
- *
- * @mixin EloquentBuilder
- *
- * @method static MscToken firstOrCreate(array $attributes = [], array $values = [])
- * @method static EloquentBuilder|MscToken newModelQuery()
- * @method static EloquentBuilder|MscToken newQuery()
- * @method static EloquentBuilder|MscToken query()
  */
 class MscToken extends Model
 {

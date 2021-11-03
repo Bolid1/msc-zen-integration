@@ -19,14 +19,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon|null $last_synced_at Дата последней синхронизации
  * @property Integration[]|Collection $integrations Интеграции, связанные с этой группой
  * @property ZenRawItem[]|Collection $items Сущности из ZenMoney
- *
- * @mixin EloquentBuilder
- *
- * @method static ZenGroup firstOrCreate(array $attributes = [], array $values = [])
- * @method static ZenGroup findOrNew($id, $columns = ['*'])
- * @method static EloquentBuilder|ZenGroup newModelQuery()
- * @method static EloquentBuilder|ZenGroup newQuery()
- * @method static EloquentBuilder|ZenGroup query()
  */
 class ZenGroup extends Model
 {

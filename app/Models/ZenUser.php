@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Extensions\EloquentBuilder;
 use App\Extensions\Model;
 use Illuminate\Support\Carbon;
 
@@ -15,14 +14,6 @@ use Illuminate\Support\Carbon;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property int $group_id Идентификатор группы {@see ZenGroup::$id}
- *
- * @mixin EloquentBuilder
- *
- * @method static ZenUser firstOrCreate(array $attributes = [], array $values = [])
- * @method static EloquentBuilder|ZenUser newModelQuery()
- * @method static EloquentBuilder|ZenUser newQuery()
- * @method static EloquentBuilder|ZenUser query()
- * @method static EloquentBuilder|ZenUser where($column, $operator = null, $value = null, $boolean = 'and')
  */
 class ZenUser extends Model
 {

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Extensions\EloquentBuilder;
 use App\Extensions\Model;
 use Illuminate\Support\Carbon;
 
@@ -21,13 +20,6 @@ use Illuminate\Support\Carbon;
  * @property string $refresh Специальный ключ для получения нового токена
  * @property string $status Статус токена: рабочий/сломан
  * @property string|null $last_error Информация о последней полученной ошибке
- *
- * @mixin EloquentBuilder
- *
- * @method static ZenToken firstOrCreate(array $attributes = [], array $values = [])
- * @method static EloquentBuilder|ZenToken newModelQuery()
- * @method static EloquentBuilder|ZenToken newQuery()
- * @method static EloquentBuilder|ZenToken query()
  */
 class ZenToken extends Model
 {

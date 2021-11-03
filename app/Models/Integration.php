@@ -6,7 +6,9 @@ namespace App\Models;
 
 use App\Extensions\EloquentBuilder;
 use App\Extensions\Model;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -19,14 +21,8 @@ use Illuminate\Support\Carbon;
  * @property string $msc_firm_id Идентификатора фирмы MSC
  * @property positive-int $group_id Идентификатор группы {@see ZenGroup::$id}
  * @property ZenGroup $group Группа {@see ZenGroup}
- *
- * @mixin EloquentBuilder
- *
- * @method static Integration updateOrCreate(array $attributes, array $values = [])
- * @method static Integration|null find(int $id)
- * @method static EloquentBuilder|Integration newModelQuery()
- * @method static EloquentBuilder|Integration newQuery()
- * @method static EloquentBuilder|Integration query()
+ * @property Collection|MscToken[] $msc_tokens Токены от MSC
+ * @property Collection|ZenResourceResult[] $zen_resource_results Информация о статусе отправке ресурса ZenMoney в MSC
  */
 class Integration extends Model
 {
@@ -45,5 +41,19 @@ class Integration extends Model
     public function group(): BelongsTo
     {
         return $this->belongsTo(ZenGroup::class, 'group_id');
+    }
+
+    public function msc_tokens(): HasMany
+    {
+        return $this->hasMany(MscToken::class, 'msc_firm_id', 'msc_firm_id');
+    }
+
+    public function zen_resource_results(): EloquentBuilder|HasMany
+    {
+        return $this->hasMany(
+            ZenResourceResult::class,
+            'msc_firm_id',
+            'msc_firm_id'
+        );
     }
 }
