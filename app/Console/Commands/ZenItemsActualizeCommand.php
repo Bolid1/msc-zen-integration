@@ -65,9 +65,7 @@ class ZenItemsActualizeCommand extends Command
             $query = $group
                 ->items()
                 ->with('results')
-                ->where('need_result', true)
-                ->orderBy('updated_at')
-                ->orderBy('id');
+                ->where('need_result', true);
 
             $this->info('Query: '.$query->toSql());
 
