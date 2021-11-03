@@ -20,9 +20,10 @@ class EloquentBuilder extends BaseBuilder
     public function minMaxCount(string $field): array
     {
         $stat = (array)$this
-            ->clone()
             ->getQuery()
-            ->selectRaw("MIN({$field}) as min, MAX({$field}) as max, COUNT(*) as count")
+            ->cloneWithout(['columns'])
+            ->cloneWithoutBindings(['select'])
+            ->selectRaw("MIN({$field}) as min, MAX({$field}) as max, COUNT({$field}) as count")
             ->first()
         ;
 
