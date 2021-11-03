@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
+use App\Extensions\EloquentBuilder;
 use App\Extensions\Model;
-use Illuminate\Database\Eloquent\Builder;
 
 class Repository
 {
@@ -16,7 +16,7 @@ class Repository
         $this->model = $model;
     }
 
-    public function query(): Model|Builder
+    public function query(): Model|EloquentBuilder
     {
         return $this->model->newQuery();
     }
